@@ -1,0 +1,21 @@
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=pgadmin
+      - POSTGRES_PASSWORD=pgadmin
+      - POSTGRES_DB=library
+    ports:
+      - "5432:5432"
+    restart: always
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:latest
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=williamscotthaley@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=pgadmin
+    ports:
+      - "5050:80"
+    restart: always
