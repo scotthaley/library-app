@@ -1,7 +1,19 @@
 import express from "express";
-import { searchBooks } from "./db";
+import { featuredBooks, searchBooks } from "./db";
+import cors from "cors";
 const app = express();
 const port = 3000;
+
+const corsOptions = {
+  origin: ["http://localhost:5173"],
+};
+
+app.use(cors(corsOptions));
+
+app.get("/api/featured", async (_, res) => {
+  const books = await featuredBooks();
+  res.send(books);
+});
 
 app.get("/api/books", async (req, res) => {
   const term = (req.query.search as string) || "";

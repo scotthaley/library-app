@@ -16,3 +16,10 @@ GROUP BY b.id`,
     [`%${search.toLowerCase()}%`, search],
   );
 };
+
+export const featuredBooks = () => {
+  return db.any(`
+SELECT b.* FROM books AS b
+WHERE b.featured = true
+`);
+};
