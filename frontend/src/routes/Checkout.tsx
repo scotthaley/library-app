@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
 import { getBookById } from "../api";
+import dayjs from "dayjs";
+import { useMemo } from "react";
 
 function Checkout() {
   let { id } = useParams();
@@ -8,6 +10,9 @@ function Checkout() {
     queryFn: () => getBookById(id ? parseInt(id) : 0),
     queryKey: ["get-book", id],
   });
+
+  const today = useMemo(() => dayjs().format("MM/DD/YYYY"), []);
+  const dueBy = useMemo(() => dayjs().add(3, "week").format("MM/DD/YYYY"), []);
 
   return (
     <div className="flex flex-col items-center">
@@ -28,7 +33,10 @@ function Checkout() {
                     <h4 className="font-bold text-xl">{data.name}</h4>
                     <div className="mt-2">by {data.author}</div>
                     <div className="text-sm bg-green-200 rounded-md px-2 py-1 inline-block mt-6">
-                      <b>{data.count}</b> Copies Available
+                      {data.count == 1
+                        ? `${data.count} Copy `
+                        : `${data.count} Copies `}
+                      Available
                     </div>
                   </div>
                 </div>
@@ -63,14 +71,9 @@ function Checkout() {
               <h4 className="font-bold text-md">Checkout Details</h4>
               <form>
                 <label htmlFor="checkout-date">Checkout Date</label>
-                <input
-                  id="checkout-date"
-                  readOnly
-                  type="text"
-                  value="05/03/2025"
-                />
+                <input id="checkout-date" readOnly type="text" value={today} />
                 <label htmlFor="due-date">Due Date</label>
-                <input id="due-date" readOnly type="text" value="05/23/2025" />
+                <input id="due-date" readOnly type="text" value={dueBy} />
                 <label htmlFor="library-card">Library Card Number</label>
                 <input id="library-card" type="text" placeholder="12345" />
                 <label htmlFor="pin">Pin Number</label>
