@@ -46,3 +46,15 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+label {
+  @apply text-gray-700 block mt-4 text-sm;
+}
+
+input[type="text"] {
+  @apply rounded-md w-full mt-2 border-1 border-gray-200 p-2;
+}
+
+input[type="text"][readonly] {
+  @apply bg-gray-100;
+}
