@@ -1,5 +1,5 @@
 import express from "express";
-import { featuredBooks, searchBooks } from "./db";
+import { featuredBooks, getBookById, searchBooks } from "./db";
 import cors from "cors";
 const app = express();
 const port = 3000;
@@ -19,6 +19,12 @@ app.get("/api/books", async (req, res) => {
   const term = (req.query.search as string) || "";
   const books = await searchBooks(term);
   res.send(books);
+});
+
+app.get("/api/books/:id", async (req, res) => {
+  const id = parseInt(req.params.id);
+  const book = await getBookById(id);
+  res.send(book);
 });
 
 app.listen(port, () => {

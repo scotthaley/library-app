@@ -23,3 +23,15 @@ SELECT b.* FROM books AS b
 WHERE b.featured = true
 `);
 };
+
+export const getBookById = (id: number) => {
+  return db.oneOrNone(
+    `
+SELECT b.*, count(bc.id) FROM books AS b
+LEFT JOIN book_copies AS bc ON b.id = bc.book 
+WHERE b.id = $1
+GROUP BY b.id
+`,
+    id,
+  );
+};
