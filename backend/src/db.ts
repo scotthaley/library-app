@@ -68,9 +68,9 @@ export const checkoutBook: (
   card: string,
   pin: string,
 ) => Promise<{ error: null | number; book?: number }> = async (
-  id: number,
-  card: string,
-  pin: string,
+  id,
+  card,
+  pin,
 ) => {
   const user = await getAuthenticatedUser(card, pin);
 
@@ -81,7 +81,7 @@ export const checkoutBook: (
       const today = dayjs().format("YYYY-MM-DD");
       const due = dayjs().add(3, "weeks").format("YYYY-MM-DD");
 
-      db.none(
+      await db.none(
         `
 UPDATE book_copies
 SET checked_out_by = $1,
@@ -118,6 +118,31 @@ WHERE bc.checked_out_by = $1
     );
 
     return { error: null, books };
+  }
+
+  return { error: 401 };
+};
+
+export const returnBook: (
+  id: number,
+  card: string,
+  pin: string,
+) => Promise<{ error: null | number }> = async (id, card, pin) => {
+  const user = await getAuthenticatedUser(card, pin);
+
+  if (user) {
+    await db.none(
+      `
+UPDATE book_copies
+SET checked_out_by = null,
+check_out_date = null,
+due_date = null
+WHERE id = $1
+`,
+      [id],
+    );
+
+    return { error: null };
   }
 
   return { error: 401 };

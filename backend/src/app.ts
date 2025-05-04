@@ -4,6 +4,7 @@ import {
   featuredBooks,
   getBookById,
   getUserBooks,
+  returnBook,
   searchBooks,
 } from "./db";
 import cors from "cors";
@@ -61,6 +62,22 @@ app.post("/api/checkout", async (req, res) => {
       case 404:
         res.status(result.error).send("Not Found");
         break;
+      case 401:
+        res.status(result.error).send("Unauthorized");
+        break;
+    }
+  }
+});
+
+app.post("/api/return", async (req, res) => {
+  const id = parseInt(req.body.id);
+  const card = req.body.card;
+  const pin = req.body.pin;
+  const result = await returnBook(id, card, pin);
+  if (!result.error) {
+    res.send({ success: true });
+  } else {
+    switch (result.error) {
       case 401:
         res.status(result.error).send("Unauthorized");
         break;
