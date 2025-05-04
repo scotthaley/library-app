@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import "dotenv/config";
 import pgp from "pg-promise";
 const db = pgp()(process.env.DATABASE_URL);
@@ -34,4 +35,68 @@ GROUP BY b.id
 `,
     id,
   );
+};
+
+const getAuthenticatedUser = async (card: string, pin: string) => {
+  return (
+    await db.oneOrNone(
+      `
+SELECT id FROM users
+WHERE card_number = $1 AND pin_number = $2
+`,
+      [card, pin],
+    )
+  )?.id;
+};
+
+const getBookCopy = async (id: number) => {
+  return (
+    await db.oneOrNone(
+      `
+SELECT id FROM book_copies
+WHERE book = $1
+AND checked_out_by IS NULL
+LIMIT 1
+`,
+      id,
+    )
+  )?.id;
+};
+
+export const checkoutBook: (
+  id: number,
+  card: string,
+  pin: string,
+) => Promise<{ error: null | number; book?: number }> = async (
+  id: number,
+  card: string,
+  pin: string,
+) => {
+  const user = await getAuthenticatedUser(card, pin);
+
+  if (user) {
+    const book = await getBookCopy(id);
+
+    if (book) {
+      const today = dayjs().format("YYYY-MM-DD");
+      const due = dayjs().add(3, "weeks").format("YYYY-MM-DD");
+
+      db.none(
+        `
+UPDATE book_copies
+SET checked_out_by = $1,
+check_out_date = $3,
+due_date = $4
+WHERE id = $2
+`,
+        [user, book, today, due],
+      );
+
+      return { error: null, book };
+    }
+
+    return { error: 404 };
+  }
+
+  return { error: 401 };
 };
