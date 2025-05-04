@@ -100,3 +100,25 @@ WHERE id = $2
 
   return { error: 401 };
 };
+
+export const getUserBooks: (
+  card: string,
+  pin: string,
+) => Promise<{ error: null | number; books?: any[] }> = async (card, pin) => {
+  const user = await getAuthenticatedUser(card, pin);
+
+  if (user) {
+    const books = await db.manyOrNone(
+      `
+SELECT bc.id copy_id, b.* FROM book_copies AS bc
+JOIN books AS b ON bc.book = b.id
+WHERE bc.checked_out_by = $1
+`,
+      [user],
+    );
+
+    return { error: null, books };
+  }
+
+  return { error: 401 };
+};
