@@ -3,6 +3,7 @@ WORKDIR /app
 COPY frontend/package.json /app
 RUN npm install
 COPY frontend/ /app
+ENV VITE_API_HOSTNAME=http://localhost:3000
 RUN npm run build
 
 FROM node

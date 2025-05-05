@@ -55,21 +55,27 @@ After logging in:
 
 #### Backend Setup
 
-```bash
-cd backend
-yarn
-yarn start
-```
-
 Create a `.env` file with:
 
 ```env
 DATABASE_URL=postgres://pgadmin:pgadmin@localhost:5432/library
 ```
 
+```bash
+cd backend
+yarn
+yarn start
+```
+
 > Note: You will need to manually run a Postgres server and apply migrations if not using Docker.
 
 #### Frontend Setup
+
+Create a `.env` file with:
+
+```env
+VITE_API_HOSTNAME=http://localhost:3000
+```
 
 ```bash
 cd frontend
