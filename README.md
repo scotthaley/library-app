@@ -92,7 +92,13 @@ App will be available at: [http://localhost:5173](http://localhost:5173)
 
 ## 🔧 Database & Migrations
 
-![postgres ERD]("https://github.com/scotthaley/library-app/blob/main/ERD.png?raw=true")
+The design of the schema is set up so that books with details can be stored in the database even if there are no copies of the book.
+When a user checks out a book, they are actually checking out a specific copy of the book, which is then associated with that user.
+The checkout endpoint takes the generic book id, but then tries to find a book copy of that book that is not currently checked out.
+
+Checkout date and due date are not really used at this point, except due date is displayed when looking at your list of checked out books.
+
+![CleanShot 2025-05-05 at 03 22 51@2x](https://github.com/user-attachments/assets/b10dc414-5f00-40ca-8bdd-1a27b06af675)
 
 This project uses **[node-pg-migrate](https://github.com/salsita/node-pg-migrate)** to manage database migrations.
 
