@@ -27,7 +27,7 @@ services:
     container_name: pgadmin
     image: dpage/pgadmin4:latest
     environment:
-      - PGADMIN_DEFAULT_EMAIL=williamscotthaley@gmail.com
+      - PGADMIN_DEFAULT_EMAIL=you@email.com
       - PGADMIN_DEFAULT_PASSWORD=pgadmin
     ports:
       - "5050:80"
