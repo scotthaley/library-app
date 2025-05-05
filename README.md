@@ -47,7 +47,10 @@ After logging in:
 1. Right-click on **Servers**
 2. Choose **Register > Server**
 3. Enter a name (anything)
-4. Under the **Connection** tab, set **Host** to `postgres`
+4. Under the **Connection** tab
+   - set **Host** to `postgres`
+   - set **Username** to `pgadmin`
+   - set **Password** to `pgadmin`
 
 ---
 
@@ -88,6 +91,8 @@ App will be available at: [http://localhost:5173](http://localhost:5173)
 ---
 
 ## 🔧 Database & Migrations
+
+![postgres ERD]("./ERD.png")
 
 This project uses **[node-pg-migrate](https://github.com/salsita/node-pg-migrate)** to manage database migrations.
 
