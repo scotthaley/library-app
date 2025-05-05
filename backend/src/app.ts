@@ -88,6 +88,6 @@ app.post("/api/return", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
+module.exports = app.listen(port, () => {
   return console.log(`Backend listening on port ${port}`);
 });
