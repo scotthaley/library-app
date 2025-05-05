@@ -5,10 +5,11 @@ interface IBookCardProps {
   author: string;
   id: number;
   cta: string;
-  ctaPath: string;
+  ctaPath?: string;
+  onCTA?: (id: number) => void;
 }
 
-function BookCard({ name, author, id, cta, ctaPath }: IBookCardProps) {
+function BookCard({ name, author, id, cta, ctaPath, onCTA }: IBookCardProps) {
   return (
     <div className="bg-white shadow-lg rounded-xl overflow-hidden flex flex-col">
       <div className="bg-gradient-to-b from-blue-600 to-cyan-600 h-[200px]"></div>
@@ -16,9 +17,12 @@ function BookCard({ name, author, id, cta, ctaPath }: IBookCardProps) {
         <h4 className="font-semibold grow">{name}</h4>
         <div className="mt-4">{author}</div>
         <div className="mt-4 text-right">
-          <Link to={`${ctaPath}${id}`}>
-            <button>{cta}</button>
-          </Link>
+          {ctaPath && (
+            <Link to={`${ctaPath}${id}`}>
+              <button>{cta}</button>
+            </Link>
+          )}
+          {onCTA && <button onClick={() => onCTA(id)}>{cta}</button>}
         </div>
       </div>
     </div>
