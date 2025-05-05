@@ -24,7 +24,7 @@ function Home() {
               <input
                 className="bg-white"
                 type="text"
-                placeholder="Name, Keyword, or ISBN"
+                placeholder="Title, Keyword, or ISBN"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
               />

@@ -1,4 +1,5 @@
 import express from "express";
+import path from "path";
 import {
   checkoutBook,
   featuredBooks,
@@ -17,6 +18,8 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+
+app.use(express.static(path.join(__dirname, "../react")));
 
 app.get("/api/featured", async (_, res) => {
   const books = await featuredBooks();
