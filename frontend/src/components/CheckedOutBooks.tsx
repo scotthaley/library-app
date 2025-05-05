@@ -16,14 +16,17 @@ function CheckedOutBooks({ card, pin }: ICheckedOutBooksProps) {
 
   const queryClient = useQueryClient();
 
-  const handleReturnBook = useCallback(async (id: number) => {
-    const response = await returnBook(id, card, pin);
-    if (response.status === 200) {
-      queryClient.invalidateQueries({ queryKey: ["my-books", card, pin] });
-    } else {
-      alert(`Recieved error: ${response.status}`);
-    }
-  }, []);
+  const handleReturnBook = useCallback(
+    async (id: number) => {
+      const response = await returnBook(id, card, pin);
+      if (response.status === 200) {
+        queryClient.invalidateQueries({ queryKey: ["my-books", card, pin] });
+      } else {
+        alert(`Recieved error: ${response.status}`);
+      }
+    },
+    [card, pin],
+  );
 
   return (
     <div>

@@ -18,6 +18,15 @@ export const getFeaturedBooks: () => Promise<IBook[]> = async () => {
   return await response.json();
 };
 
+export const searchBooks: (search: string) => Promise<IBook[]> = async (
+  search,
+) => {
+  const response = await fetch(
+    `${import.meta.env.VITE_API_HOSTNAME}/api/books?search=${search}`,
+  );
+  return await response.json();
+};
+
 export const getMyBooks: (
   card: string,
   pin: string,

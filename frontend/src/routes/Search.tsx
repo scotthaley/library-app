@@ -1,11 +1,15 @@
 import { useCallback, useState } from "react";
-import FeaturedBooks from "../components/FeaturedBooks";
 import NavBar from "../components/NavBar";
-import { useNavigate } from "react-router";
+import SearchResults from "../components/SearchResults";
+import { useNavigate, useSearchParams } from "react-router";
 
-function Home() {
+function Search() {
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [searchInput, setSearchInput] = useState("");
+
+  const [searchInput, setSearchInput] = useState(
+    searchParams.get("query") || "",
+  );
 
   const handleSearch = useCallback(() => {
     navigate(`/search?query=${searchInput}`);
@@ -34,10 +38,10 @@ function Home() {
             </form>
           </div>
         </div>
-        <FeaturedBooks />
+        <SearchResults search={searchParams.get("query") || ""} />
       </div>
     </div>
   );
 }
 
-export default Home;
+export default Search;
