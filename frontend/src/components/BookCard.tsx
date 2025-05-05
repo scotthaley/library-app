@@ -21,7 +21,7 @@ function BookCard({
   dueDate,
 }: IBookCardProps) {
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center" data-testid="book-card">
       <div className="bg-white shadow-lg rounded-xl overflow-hidden flex flex-col w-[240px]">
         <div className="bg-gradient-to-b from-blue-600 to-cyan-600 h-[200px]"></div>
         <div className="p-4 grow flex flex-col">
