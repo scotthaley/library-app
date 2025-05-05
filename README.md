@@ -182,9 +182,9 @@ Checks out a book copy
 
 ```json
 {
-  "cardNumber": "12345",
+  "card": "12345",
   "pin": "678",
-  "bookId": 1
+  "id": 1
 }
 ```
 
@@ -196,9 +196,9 @@ Returns a book copy
 
 ```json
 {
-  "cardNumber": "12345",
+  "card": "12345",
   "pin": "678",
-  "copyId": 42
+  "id": 42
 }
 ```
 
