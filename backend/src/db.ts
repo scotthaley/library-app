@@ -6,7 +6,7 @@ const db = pgp()(process.env.DATABASE_URL);
 export const searchBooks = (search: string) => {
   return db.any(
     `
-SELECT b.*, count(bc.id) FROM books AS b 
+SELECT b.*, count(bc.id) FILTER(WHERE bc.checked_out_by IS NULL) FROM books AS b 
 LEFT JOIN book_copies AS bc ON b.id = bc.book 
 WHERE lower(b.name) LIKE $1
 OR b.isbn = $2
@@ -28,8 +28,8 @@ WHERE b.featured = true
 export const getBookById = (id: number) => {
   return db.oneOrNone(
     `
-SELECT b.*, count(bc.id) FROM books AS b
-LEFT JOIN book_copies AS bc ON b.id = bc.book 
+SELECT b.*, count(bc.id) FILTER(WHERE bc.checked_out_by IS NULL) FROM books AS b
+LEFT JOIN book_copies AS bc ON b.id = bc.book
 WHERE b.id = $1
 GROUP BY b.id
 `,
