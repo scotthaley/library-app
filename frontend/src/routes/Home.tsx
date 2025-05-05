@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import FeaturedBooks from "../components/FeaturedBooks";
 import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router";
+import PurpleBar from "../components/PurpleBar";
 
 function Home() {
   const navigate = useNavigate();
@@ -15,11 +16,8 @@ function Home() {
     <div className="flex flex-col items-center">
       <NavBar />
       <div className="max-w-[1000px] w-full">
-        <div className="my-16 bg-gradient-to-r from-violet-600 to-fuchsia-400 rounded-xl p-8">
-          <h2 className="text-white text-2xl font-bold">
-            Discover Your Next Adventure
-          </h2>
-          <div className="w-1/2 mt-6">
+        <PurpleBar title="Discover Your Next Adventure">
+          <div className="md:w-1/2 mt-6">
             <form className="flex items-center" action={handleSearch}>
               <input
                 className="bg-white"
@@ -33,7 +31,7 @@ function Home() {
               </button>
             </form>
           </div>
-        </div>
+        </PurpleBar>
         <FeaturedBooks />
       </div>
     </div>

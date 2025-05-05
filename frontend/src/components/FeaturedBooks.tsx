@@ -9,10 +9,10 @@ function FeaturedBooks() {
   });
 
   return (
-    <div>
+    <div className="mx-4 lg:mx-0">
       <h3 className="text-lg font-bold">Featured Books</h3>
       {data && (
-        <div className="grid grid-cols-4 gap-4 mt-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6">
           {data.slice(0, 4).map((b, i) => (
             <BookCard
               key={i}

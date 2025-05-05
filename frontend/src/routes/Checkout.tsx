@@ -4,6 +4,7 @@ import { checkoutBook, getBookById } from "../api";
 import dayjs from "dayjs";
 import { useCallback, useMemo, useState } from "react";
 import NavBar from "../components/NavBar";
+import PurpleBar from "../components/PurpleBar";
 
 function Checkout() {
   let { id } = useParams();
@@ -43,11 +44,9 @@ function Checkout() {
     <div className="flex flex-col items-center">
       <NavBar />
       <div className="max-w-[1000px] w-full">
-        <div className="my-16 bg-gradient-to-r from-violet-600 to-fuchsia-400 rounded-xl p-8">
-          <h2 className="text-white text-2xl font-bold">Checkout</h2>
-        </div>
+        <PurpleBar title="Checkout" />
         {data && (
-          <div className="bg-white rounded-xl grid grid-cols-2 p-4">
+          <div className="bg-white rounded-xl grid md:grid-cols-2 p-4">
             <div>
               <div className="flex flex-col">
                 <div className="flex">
@@ -91,7 +90,7 @@ function Checkout() {
               </div>
             </div>
             {!success && count > 0 && (
-              <div>
+              <div className="mt-16 border-t-1 border-t-gray-300 pt-4 md:mt-0 md:border-t-0 md:pt-0">
                 <h4 className="font-bold text-md">Checkout Details</h4>
                 <form action={handleSubmit}>
                   <label htmlFor="checkout-date">Checkout Date</label>
