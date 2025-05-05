@@ -204,6 +204,14 @@ Returns a book copy
 
 ---
 
+## 📂 Testing
+
+Backend tests can be ran with `yarn test` in the backend folder.
+
+Playwright tests can be ran with `yarn playwright test` in the playwright folder. Make sure to `yarn install` in the playwright folder first. App must be running at http://localhost:3000 for the Playwright tests to work.
+
+---
+
 ## 📂 Project Structure
 
 ```
