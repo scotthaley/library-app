@@ -92,7 +92,7 @@ App will be available at: [http://localhost:5173](http://localhost:5173)
 
 ## 🔧 Database & Migrations
 
-![postgres ERD]("./ERD.png")
+![postgres ERD]("https://github.com/scotthaley/library-app/blob/main/ERD.png?raw=true")
 
 This project uses **[node-pg-migrate](https://github.com/salsita/node-pg-migrate)** to manage database migrations.
 
