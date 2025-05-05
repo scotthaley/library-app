@@ -8,6 +8,7 @@ interface IBook {
   genre: string[];
   pages: number;
   count: number;
+  due_date: string;
 }
 
 export const getFeaturedBooks: () => Promise<IBook[]> = async () => {

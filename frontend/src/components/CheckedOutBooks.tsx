@@ -35,6 +35,7 @@ function CheckedOutBooks({ card, pin }: ICheckedOutBooksProps) {
               id={b.copy_id}
               name={b.name}
               author={b.author}
+              dueDate={b.due_date}
               cta="Return"
               onCTA={handleReturnBook}
             />

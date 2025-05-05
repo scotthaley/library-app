@@ -110,7 +110,7 @@ export const getUserBooks: (
   if (user) {
     const books = await db.manyOrNone(
       `
-SELECT bc.id copy_id, b.* FROM book_copies AS bc
+SELECT bc.id copy_id, bc.due_date, b.* FROM book_copies AS bc
 JOIN books AS b ON bc.book = b.id
 WHERE bc.checked_out_by = $1
 `,

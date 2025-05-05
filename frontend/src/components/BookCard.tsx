@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { Link } from "react-router";
 
 interface IBookCardProps {
@@ -7,15 +8,27 @@ interface IBookCardProps {
   cta: string;
   ctaPath?: string;
   onCTA?: (id: number) => void;
+  dueDate?: string;
 }
 
-function BookCard({ name, author, id, cta, ctaPath, onCTA }: IBookCardProps) {
+function BookCard({
+  name,
+  author,
+  id,
+  cta,
+  ctaPath,
+  onCTA,
+  dueDate,
+}: IBookCardProps) {
   return (
     <div className="bg-white shadow-lg rounded-xl overflow-hidden flex flex-col">
       <div className="bg-gradient-to-b from-blue-600 to-cyan-600 h-[200px]"></div>
       <div className="p-4 grow flex flex-col">
         <h4 className="font-semibold grow">{name}</h4>
         <div className="mt-4">{author}</div>
+        {dueDate && (
+          <div className="mt-4">Due: {dayjs(dueDate).format("MM/DD/YYYY")}</div>
+        )}
         <div className="mt-4 text-right">
           {ctaPath && (
             <Link to={`${ctaPath}${id}`}>
