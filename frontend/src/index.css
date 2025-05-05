@@ -46,6 +46,9 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+button:disabled {
+  @apply bg-gray-400;
+}
 
 label {
   @apply text-gray-700 block mt-4 text-sm;

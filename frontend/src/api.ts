@@ -1,4 +1,5 @@
 interface IBook {
+  id: number;
   name: string;
   author: string;
   publisher: string;
@@ -22,4 +23,22 @@ export const getBookById: (id: number) => Promise<IBook> = async (
     `${import.meta.env.VITE_API_HOSTNAME}/api/books/${id}`,
   );
   return await response.json();
+};
+
+export const checkoutBook: (
+  id: number,
+  card: string,
+  pin: string,
+) => Promise<Response> = async (id, card, pin) => {
+  return fetch(`${import.meta.env.VITE_API_HOSTNAME}/api/checkout`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+      card,
+      pin,
+    }),
+  });
 };

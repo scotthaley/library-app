@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getFeaturedBooks } from "../api";
+import { Link } from "react-router";
 
 function FeaturedBooks() {
   const { data } = useQuery({
@@ -22,7 +23,9 @@ function FeaturedBooks() {
                 <h4 className="font-semibold grow">{b.name}</h4>
                 <div className="mt-4">{b.author}</div>
                 <div className="mt-4 text-right">
-                  <button>Checkout</button>
+                  <Link to={`checkout/${b.id}`}>
+                    <button>Checkout</button>
+                  </Link>
                 </div>
               </div>
             </div>
